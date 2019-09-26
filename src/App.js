@@ -1,24 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [movies, setMovies] = useState([])
+
+  const handleSearch = (e) => {
+    if (e.key === 'Enter'){
+      var title = e.target.value;
+
+      const exec = async() => {
+        const response = await fetch('http://www.omdbapi.com/?s=' + encodeURI(title) + '&apikey=57b9a176');
+        const json = await response.json();
+
+        var movies = json.Search;
+
+        setMovies(movies);
+      };
+      exec();
+    }
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App"> 
+      <div>       
+        <h1>API - OMDb</h1>
+        <form onSubmit={(e) => onSubmit(e)}>
+          <input 
+            type="text" 
+            placeholder="Título do Filme..." 
+            onKeyDown={(e) => handleSearch(e)}
+          />
+        </form>
+      </div>
+      <div>
+        <ul>
+          {
+            movies.map(movie => {
+              return (
+                <li>
+                  <img src={movie.Poster} />
+                  <br/>
+                  <label>Título do Filme: </label>
+                  <span>{movie.Title}</span>
+                  <br/>
+                  <label>Ano Lançamento: </label>
+                  <span>{movie.Year}</span>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
     </div>
   );
 }
