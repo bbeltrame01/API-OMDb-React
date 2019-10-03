@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {FaStar} from 'react-icons/fa';
 import './App.css';
 
 function App() {
@@ -25,8 +26,9 @@ function App() {
   }
 
   return (
-    <div className="App"> 
-      <div>       
+    <>
+      <div className="Container-Header"> 
+        <FaStar className="Header-Icon" color="yellow" size={25} />   
         <h1>API - OMDb</h1>
         <form onSubmit={(e) => onSubmit(e)}>
           <input 
@@ -36,18 +38,16 @@ function App() {
           />
         </form>
       </div>
-      <div>
+      <div className="Container-Content">
         <ul>
           {
             movies.map(movie => {
               return (
-                <li>
+                <li>                  
                   <img src={movie.Poster} />
                   <br/>
-                  <label>Título do Filme: </label>
-                  <span>{movie.Title}</span>
+                  <span className="Movie-Title">{movie.Title}</span>
                   <br/>
-                  <label>Ano Lançamento: </label>
                   <span>{movie.Year}</span>
                 </li>
               );
@@ -55,7 +55,7 @@ function App() {
           }
         </ul>
       </div>
-    </div>
+    </>
   );
 }
 
