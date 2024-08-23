@@ -1,4 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## API - OMDb
+
+![image](https://github.com/user-attachments/assets/8e4c4b39-c7aa-407e-9ad4-0874e014b9fb)
+
 
 ## Available Scripts
 
